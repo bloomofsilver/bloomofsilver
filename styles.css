@@ -1,0 +1,47 @@
+/* Общие стили */
+body {
+    font-family: 'Arial', sans-serif;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Главная страница */
+.main-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('background.jpg') no-repeat center/cover;
+}
+
+/* Страница с битами */
+.beats-page {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.beat {
+    margin: 30px 0;
+    padding: 20px;
+    background: #1a1a1a;
+    border-radius: 10px;
+}
+
+audio {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Кнопка "Назад" */
+.back-button {
+    display: inline-block;
+    margin-top: 30px;
+    color: #FF6B00;
+    text-decoration: none;
+}
