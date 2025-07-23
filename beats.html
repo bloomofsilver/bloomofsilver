@@ -3,20 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мои биты | Bloom Of Silver</title>
+    <title>Мои биты | BIOBEASTS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --dark: #0a0a0f;
             --light: #f5f5f7;
             --accent: #6e44ff;
-            --accent-hover: #8d6aff;
             --card-bg: #16161d;
-        }
-        
-        @font-face {
-            font-family: 'Inter';
-            src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
+            --text-secondary: rgba(245, 245, 247, 0.6);
         }
         
         body {
@@ -25,56 +20,29 @@
             color: var(--light);
             min-height: 100vh;
             margin: 0;
-            overflow-x: hidden;
+            padding: 2rem;
         }
         
-        /* Тонкие движущиеся линии фона */
-        .bg-lines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.15;
-            background: 
-                linear-gradient(90deg, var(--dark) 21px, transparent 1%) center,
-                linear-gradient(var(--dark) 21px, transparent 1%) center,
-                var(--accent);
-            background-size: 22px 22px;
-            animation: bgMove 120s linear infinite;
-        }
-        
-        @keyframes bgMove {
-            0% { background-position: 0 0, 0 0; }
-            100% { background-position: 1000px 0, 0 1000px; }
-        }
-        
-        .container {
-            max-width: 1200px;
-            padding: 3rem 2rem;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        /* Шапка */
         .header {
-            text-align: center;
-            margin-bottom: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
         }
         
         h1 {
-            font-weight: 700;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 1.8rem;
+            margin: 0;
         }
         
         .back-link {
-            display: inline-flex;
-            align-items: center;
-            color: rgba(245, 245, 247, 0.7);
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             transition: color 0.3s;
         }
         
@@ -82,51 +50,76 @@
             color: var(--accent);
         }
         
-        .back-link i {
-            margin-right: 8px;
-        }
-        
-        /* Сетка битов */
-        .beats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 2rem;
+        .beat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
         .beat-card {
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: transform 0.3s;
         }
         
         .beat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(110, 68, 255, 0.15);
+            transform: translateY(-3px);
+        }
+        
+        .beat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
         }
         
         .beat-title {
             font-weight: 500;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: var(--light);
+            font-size: 1.1rem;
+            margin: 0;
         }
         
-        .beat-meta {
+        .beat-tags {
             display: flex;
-            justify-content: space-between;
-            color: rgba(245, 245, 247, 0.6);
-            font-size: 0.85rem;
-            margin-bottom: 20px;
+            gap: 0.5rem;
+            margin-top: 0.3rem;
         }
         
-        /* Кастомный аудиоплеер */
+        .tag {
+            background: rgba(110, 68, 255, 0.15);
+            color: var(--accent);
+            padding: 0.3rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .player-container {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            min-width: 120px;
+        }
+        
+        .player-info i {
+            color: var(--accent);
+        }
+        
         audio {
-            width: 100%;
-            margin-top: 15px;
+            flex-grow: 1;
+            height: 40px;
         }
         
         audio::-webkit-media-controls-panel {
@@ -135,8 +128,7 @@
             border: none;
         }
         
-        audio::-webkit-media-controls-play-button,
-        audio::-webkit-media-controls-mute-button {
+        audio::-webkit-media-controls-play-button {
             background-color: var(--accent);
             border-radius: 50%;
         }
@@ -144,74 +136,68 @@
         audio::-webkit-media-controls-current-time-display,
         audio::-webkit-media-controls-time-remaining-display {
             color: var(--light);
+            font-size: 0.8rem;
         }
         
-        /* Анимации */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .beat-card {
-            animation: fadeIn 0.5s ease-out forwards;
-            opacity: 0;
-        }
-        
-        .beat-card:nth-child(1) { animation-delay: 0.1s; }
-        .beat-card:nth-child(2) { animation-delay: 0.2s; }
-        .beat-card:nth-child(3) { animation-delay: 0.3s; }
-        .beat-card:nth-child(4) { animation-delay: 0.4s; }
-        /* Добавьте больше при необходимости */
-        
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .beats-grid {
-                grid-template-columns: 1fr;
-            }
+        audio::-webkit-media-controls-timeline {
+            background-color: rgba(245, 245, 247, 0.1);
+            border-radius: 10px;
+            margin: 0 10px;
         }
     </style>
 </head>
 <body>
-    <!-- Тонкий анимированный фон -->
-    <div class="bg-lines"></div>
+    <div class="header">
+        <h1>МОИ БИТЫ</h1>
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> На главную
+        </a>
+    </div>
     
-    <div class="container">
-        <div class="header">
-            <h1>МОИ <span class="pulse">БИТЫ</span></h1>
-            <a href="index.html" class="back-link">
-                <i class="fas fa-arrow-left"></i> На главную
-            </a>
-        </div>
-        
-        <div class="beats-grid">
-            <!-- Бит 1 -->
-            <div class="beat-card">
-                <h3 class="beat-title">Beat</h3>
-                <div class="beat-meta">
-                    <span>BPM</span>
-                    <span>#trap #dark</span>
+    <div class="beat-list">
+        <!-- Бит 1 -->
+        <div class="beat-card">
+            <div class="beat-header">
+                <div>
+                    <h3 class="beat-title">Игар</h3>
+                    <div class="beat-tags">
+                        <span class="tag">#dark</span>
+                    </div>
+                </div>
+            </div>
+            <div class="player-container">
+                <div class="player-info">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>140 BPM</span>
                 </div>
                 <audio controls>
                     <source src="audio/beat1.mp3" type="audio/mpeg">
-                    Ваш браузер не поддерживает аудио элемент.
                 </audio>
             </div>
-            
-            <!-- Бит 2 -->
-            <div class="beat-card">
-                <h3 class="beat-title">Melodic</h3>
-                <div class="beat-meta">
-                    <span>BPM</span>
-                    <span>#melodic</span>
+        </div>
+        
+        <!-- Бит 2 -->
+        <div class="beat-card">
+            <div class="beat-header">
+                <div>
+                    <h3 class="beat-title">Melo dic</h3>
+                    <div class="beat-tags">
+                        <span class="tag">#melodic</span>
+                    </div>
+                </div>
+            </div>
+            <div class="player-container">
+                <div class="player-info">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>128 BPM</span>
                 </div>
                 <audio controls>
                     <source src="audio/beat2.mp3" type="audio/mpeg">
-                    Ваш браузер не поддерживает аудио элемент.
                 </audio>
             </div>
-            
-            <!-- Добавляйте новые биты по такому же шаблону -->
         </div>
+        
+        <!-- Добавьте новые биты по этому шаблону -->
     </div>
 </body>
 </html>
