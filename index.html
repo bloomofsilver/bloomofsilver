@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bloom Of Silver | Битмейкер</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <!-- Стили и шрифты -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -25,6 +29,18 @@
             min-height: 100vh;
             margin: 0;
             overflow-x: hidden;
+        }
+        
+        /* Логотип в шапке */
+        .logo-header {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 20px rgba(110, 68, 255, 0.3);
+            animation: fadeIn 0.8s ease-out;
         }
         
         /* Тонкие движущиеся линии фона */
@@ -169,6 +185,9 @@
     <div class="bg-lines"></div>
     
     <div class="container">
+        <!-- Добавлен логотип -->
+        <img src="logo.png" alt="Bloom Of Silver" class="logo-header">
+        
         <h1>Bloom Of Silver<span class="pulse"></span></h1>
         <p class="description">Эксклюзивные биты.</p>
         
@@ -183,7 +202,7 @@
                 <a href="https://instagram.com/bloomofsilver" class="social-link" target="_blank" title="Instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="bloomofsilver@gmail.com" class="social-link" title="Email">
+                <a href="mailto:bloomofsilver@gmail.com" class="social-link" title="Email">
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
